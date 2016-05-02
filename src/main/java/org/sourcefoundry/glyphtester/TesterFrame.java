@@ -12,6 +12,9 @@ public class TesterFrame {
     private static final String FONT_TO_TEST = "Hack";
     private static String DEFAULT_TEST_STRING = "[]={}_()";
 
+    /**
+     * @param args
+     */
     public static void main(final String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
