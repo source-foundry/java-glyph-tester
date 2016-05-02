@@ -1,7 +1,10 @@
 package org.sourcefoundry.glyphtester;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
+import java.awt.GraphicsEnvironment;
 import java.util.Arrays;
 
 public class TesterFrame {
