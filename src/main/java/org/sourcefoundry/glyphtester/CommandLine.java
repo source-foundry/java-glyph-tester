@@ -32,8 +32,10 @@ public class CommandLine {
 
     @Parameter(names = {"--outputdirectory"}, required = true)
     String outputDirectory;
+
     @Parameter(names = {"--renderinghints"})
     String renderingHints;
+
     @Parameter
     List<String> glyphsToTest;
     private JCommander jCommander = null;
