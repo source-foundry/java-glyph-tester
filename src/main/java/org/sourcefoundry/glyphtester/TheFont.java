@@ -47,7 +47,7 @@ public class TheFont {
      * @return
      */
     protected int getFontStyle(String fontStyle) {
-        if ("plain".equalsIgnoreCase(fontStyle)) {
+        if ("regular".equalsIgnoreCase(fontStyle)) {
             return Font.PLAIN;
         } else if ("italic".equalsIgnoreCase(fontStyle)) {
             return Font.ITALIC;

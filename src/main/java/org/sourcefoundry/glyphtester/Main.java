@@ -15,34 +15,16 @@ public class Main {
         GlyphSource glyphSource = new FontBoxGlyphSource();
         Map<Integer, String> fontGlyphs = glyphSource.read(theFont.getFontFile());
         GlyphImageRenderer glyphImageRenderer = new GlyphImageRenderer(commandLine, theFont);
-
-        for (Map.Entry<Integer, String> entry : fontGlyphs.entrySet()) {
-            glyphImageRenderer.render(entry.getKey(), entry.getValue());
+        if (commandLine.glyphsToTest != null && !commandLine.glyphsToTest.isEmpty()) {
+            for (String glyph : commandLine.glyphsToTest) {
+                glyphImageRenderer.render(commandLine.glyphsToTest.indexOf(glyph), glyph);
+            }
+        } else {
+            for (Map.Entry<Integer, String> entry : fontGlyphs.entrySet()) {
+                glyphImageRenderer.render(entry.getKey(), entry.getValue());
+            }
         }
+
         System.out.println("took " + (System.currentTimeMillis() - now) + " ms");
-        /**
-         final JFrame frame = new JFrame("Glyph Tester");
-         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-         frame.add(new FontComponent(theFont));
-         frame.setLocationByPlatform(true);
-         frame.setSize(200, 200);
-         frame.setUndecorated(true);
-         frame.setVisible(true);
-
-         static class FontComponent extends JComponent {
-
-         private TheFont theFont;
-
-         public FontComponent(TheFont theFont) {
-         this.theFont = theFont;
-         }
-
-         @Override public void paintComponent(Graphics g) {
-         theFont.paint((Graphics2D) g);
-         }
-         }
-
-         **/
     }
-
 }
