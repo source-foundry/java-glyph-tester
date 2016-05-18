@@ -16,27 +16,20 @@ public class TheFont {
 
     private Font font;
 
-    private CommandLine commandLine;
-
-    public TheFont(CommandLine commandLine, String fontName) throws Exception {
-        this.commandLine = commandLine;
-        // first we register the font
+    public TheFont(File fontFile, String fontStyle, String fontName, int fontSize) throws Exception {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, commandLine.fontFile));
-        // instantiate it
-        System.out.println(fontName);
-        font = new Font(fontName, getFontStyle(commandLine.fontStyle), commandLine.fontSize);
-        new File(commandLine.outputDirectory).mkdirs();
+        ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, fontFile));
+        font = new Font(fontName, getFontStyle(fontStyle == null ? fontFile.getName() : fontStyle), fontSize);
     }
 
-    public void paint(Graphics2D g, String glyph) {
+    public void paint(Graphics2D g, String glyph, int canvasWidth, int canvasHeight) {
         g.setFont(font);
         g.setColor(Color.WHITE);
-        g.fillRect(0, 0, commandLine.canvasWidth, commandLine.canvasHeight);
+        g.fillRect(0, 0, canvasWidth, canvasHeight);
         FontMetrics fm = g.getFontMetrics();
-        int x = (commandLine.canvasWidth - fm.stringWidth(glyph)) / 2;
+        int x = (canvasWidth - fm.stringWidth(glyph)) / 2;
         // Determine the Y coordinate for the text (note we add the ascent, as in java 2d 0 is top of the screen)
-        int y = ((commandLine.canvasHeight - fm.getHeight()) / 2) + fm.getAscent();
+        int y = ((canvasHeight - fm.getHeight()) / 2) + fm.getAscent();
         g.setColor(Color.BLACK);
         g.drawString(glyph, x, y);
     }
@@ -46,13 +39,13 @@ public class TheFont {
      * @return
      */
     protected int getFontStyle(String fontStyle) {
-        if ("regular".equalsIgnoreCase(fontStyle)) {
+        if (fontStyle.toLowerCase().contains("regular")) {
             return Font.PLAIN;
-        } else if ("italic".equalsIgnoreCase(fontStyle)) {
+        } else if (fontStyle.toLowerCase().contains("italic")) {
             return Font.ITALIC;
-        } else if ("bold".equalsIgnoreCase(fontStyle)) {
+        } else if (fontStyle.toLowerCase().contains("bold")) {
             return Font.BOLD;
-        } else if ("bolditalic".equalsIgnoreCase(fontStyle)) {
+        } else if (fontStyle.toLowerCase().contains("bolditalic")) {
             return Font.BOLD + Font.ITALIC;
         }
         throw new IllegalArgumentException("cannot parse fontstyle " + fontStyle);

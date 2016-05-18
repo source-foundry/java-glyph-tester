@@ -27,8 +27,8 @@ public class CommandLine {
     @Parameter(names = {"--canvasheight"})
     int canvasHeight = 200;
 
-    @Parameter(names = {"--outputdirectory"}, required = true)
-    String outputDirectory;
+    @Parameter(names = {"--outputdirectory"}, required = true, converter = FileConverter.class)
+    File outputDirectory;
 
     @Parameter(names = {"--renderinghints"})
     String renderingHints;
