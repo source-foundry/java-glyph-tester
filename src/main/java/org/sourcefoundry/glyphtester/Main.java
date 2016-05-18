@@ -35,7 +35,7 @@ public class Main {
             TheFont theFont = new TheFont(fontFile, fontStyle, glyphSource.getFontName(), commandLine.fontSize);
             Map<Integer, String> fontGlyphs = glyphSource.read();
             GlyphImageRenderer glyphImageRenderer = new GlyphImageRenderer(commandLine.canvasWidth, commandLine.canvasHeight,
-              theFont, new File(commandLine.outputDirectory.getAbsolutePath() + "/" + fontFile.getName()));
+              theFont, new File(commandLine.outputDirectory.getAbsolutePath() + "/" + fontFile.getName().replace(".ttf", "")));
             if (commandLine.glyphsToTest != null && !commandLine.glyphsToTest.isEmpty()) {
                 for (String glyph : commandLine.glyphsToTest) {
                     String theGlyph = glyph;
