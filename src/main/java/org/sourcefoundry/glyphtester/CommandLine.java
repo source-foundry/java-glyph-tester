@@ -18,7 +18,7 @@ public class CommandLine {
     @Parameter(names = {"--fontsize"}, required = true)
     int fontSize = 12;
 
-    @Parameter(names = {"--fontstyle"}, required = true)
+    @Parameter(names = {"--fontstyle"})
     String fontStyle;
 
     @Parameter(names = {"--canvaswidth"})
