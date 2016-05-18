@@ -33,6 +33,9 @@ public class CommandLine {
     @Parameter(names = {"--renderinghints"})
     String renderingHints;
 
+    @Parameter(names = {"--repeatGlyph"})
+    int repeatGlyph = 1;
+
     @Parameter
     List<String> glyphsToTest;
     private JCommander jCommander = null;
