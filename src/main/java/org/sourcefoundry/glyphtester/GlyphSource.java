@@ -1,6 +1,5 @@
 package org.sourcefoundry.glyphtester;
 
-import java.io.File;
 import java.util.Map;
 
 /**
@@ -8,8 +7,10 @@ import java.util.Map;
  */
 public interface GlyphSource {
 
+    String getFontName() throws Exception;
+
     /**
      * @return a map of glyph id -> character
      */
-    Map<Integer, String> read(File font) throws Exception;
+    Map<Integer, String> read() throws Exception;
 }

@@ -16,17 +16,16 @@ public class TheFont {
 
     private Font font;
 
-    private File fontFile;
     private CommandLine commandLine;
 
-    public TheFont(CommandLine commandLine) throws Exception {
+    public TheFont(CommandLine commandLine, String fontName) throws Exception {
         this.commandLine = commandLine;
         // first we register the font
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, commandLine.fontFile));
         // instantiate it
-        font = new Font(commandLine.fontName, getFontStyle(commandLine.fontStyle), commandLine.fontSize);
-        this.fontFile = commandLine.fontFile;
+        System.out.println(fontName);
+        font = new Font(fontName, getFontStyle(commandLine.fontStyle), commandLine.fontSize);
         new File(commandLine.outputDirectory).mkdirs();
     }
 
@@ -57,13 +56,5 @@ public class TheFont {
             return Font.BOLD + Font.ITALIC;
         }
         throw new IllegalArgumentException("cannot parse fontstyle " + fontStyle);
-    }
-
-    public File getFontFile() {
-        return fontFile;
-    }
-
-    public Font getFont() {
-        return font;
     }
 }
