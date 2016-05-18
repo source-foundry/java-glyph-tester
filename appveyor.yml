@@ -20,3 +20,11 @@ test_script:
 cache:
   - C:\maven\
   - C:\Users\appveyor\.m2
+artifacts:
+  - path: target/generated-glyphs
+    name: generated-glyphs-windows
+    type: zip
+
+  - path: logs
+    name: test logs
+    type: zip
