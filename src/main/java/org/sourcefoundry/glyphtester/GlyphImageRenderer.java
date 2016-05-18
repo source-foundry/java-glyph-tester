@@ -39,8 +39,7 @@ public class GlyphImageRenderer {
             g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, renderingHint);
             g.clearRect(0, 0, canvasWidth, canvasHeight);
             theFont.paint(g, glyph, canvasWidth, canvasHeight);
-            ImageIO.write(image, "jpeg", new File(outputDirectory + "/" + characterCode + "_" + renderingHint.toString() + " " +
-                    glyph + ".jpg"));
+            ImageIO.write(image, "jpeg", new File(outputDirectory + "/" + characterCode + "_" + renderingHint.toString() + ".jpg"));
         }
     }
 }
