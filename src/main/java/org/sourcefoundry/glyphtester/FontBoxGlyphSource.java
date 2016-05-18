@@ -16,19 +16,29 @@ import java.util.Map;
  */
 public class FontBoxGlyphSource implements GlyphSource {
 
-    private TTFParser ttfParser = new TTFParser();
+    private TrueTypeFont ttf;
+
+    public FontBoxGlyphSource(File fontFile) throws Exception {
+        System.out.println("Parsing font " + fontFile.getAbsolutePath());
+        ttf = new TTFParser().parse(fontFile);
+    }
 
     @Override
-    public Map<Integer, String> read(File fontFile) throws Exception {
-        TTFParser parser = ttfParser;
-        System.out.println("Parsing font " + fontFile.getAbsolutePath());
-        TrueTypeFont font = parser.parse(fontFile);
-        System.out.println("Detected font " + font.getNaming().getFontFamily() + " (" + font.getNaming().getFontSubFamily() + ") version " + font.getHeader().getFontRevision());
-        System.out.println("Total number of glyphs : " + font.getNumberOfGlyphs());
+    public String getFontName() throws Exception {
+        return ttf.getNaming().getFontFamily();
+    }
+
+    @Override
+    public Map<Integer, String> read() throws Exception {
+
+        System.out.println(ttf.getFontBBox());
+        System.out.println("Detected font " + ttf.getNaming().getFontFamily() + " (" +
+          ttf.getNaming().getFontSubFamily() + ") version " + ttf.getHeader().getFontRevision());
+        System.out.println("Total number of glyphs : " + ttf.getNumberOfGlyphs());
         Map<Integer, String> glyphs = new HashMap<>();
-        CmapSubtable unicodeCmap = font.getUnicodeCmap();
+        CmapSubtable unicodeCmap = ttf.getUnicodeCmap();
         List<String> unmappedCharacterCodes = new ArrayList<>();
-        for (int i = 0; i < font.getNumberOfGlyphs(); i++) {
+        for (int i = 0; i < ttf.getNumberOfGlyphs(); i++) {
             Integer characterCode = unicodeCmap.getCharacterCode(i);
             if (characterCode != null) {
                 glyphs.put(characterCode, String.valueOf(Character.toChars(unicodeCmap.getCharacterCode(i))));

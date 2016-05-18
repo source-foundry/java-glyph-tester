@@ -12,9 +12,6 @@ import java.util.List;
  */
 public class CommandLine {
 
-    @Parameter(names = {"--fontname"}, required = true)
-    String fontName;
-
     @Parameter(names = {"--fontfile"}, required = true, converter = FileConverter.class)
     File fontFile;
 

@@ -9,11 +9,10 @@ public class Main {
      */
     public static void main(final String[] args) throws Exception {
         long now = System.currentTimeMillis();
-        System.out.println();
         final CommandLine commandLine = new CommandLine(args);
-        final TheFont theFont = new TheFont(commandLine);
-        GlyphSource glyphSource = new FontBoxGlyphSource();
-        Map<Integer, String> fontGlyphs = glyphSource.read(theFont.getFontFile());
+        GlyphSource glyphSource = new FontBoxGlyphSource(commandLine.fontFile);
+        final TheFont theFont = new TheFont(commandLine, glyphSource.getFontName());
+        Map<Integer, String> fontGlyphs = glyphSource.read();
         GlyphImageRenderer glyphImageRenderer = new GlyphImageRenderer(commandLine, theFont);
         if (commandLine.glyphsToTest != null && !commandLine.glyphsToTest.isEmpty()) {
             for (String glyph : commandLine.glyphsToTest) {
