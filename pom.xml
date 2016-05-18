@@ -78,7 +78,6 @@
             <argument>${project.build.directory}/generated-glyphs</argument>
             <argument>--repeatGlyph</argument>
             <argument>5</argument>
-            <argument>a</argument>
           </arguments>
         </configuration>
       </plugin>
