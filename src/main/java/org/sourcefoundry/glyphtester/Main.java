@@ -16,7 +16,11 @@ public class Main {
         GlyphImageRenderer glyphImageRenderer = new GlyphImageRenderer(commandLine, theFont);
         if (commandLine.glyphsToTest != null && !commandLine.glyphsToTest.isEmpty()) {
             for (String glyph : commandLine.glyphsToTest) {
-                glyphImageRenderer.render(commandLine.glyphsToTest.indexOf(glyph), glyph);
+                String theGlyph = glyph;
+                for (int i = 0; i < commandLine.repeatGlyph - 1; i++) {
+                    theGlyph += glyph;
+                }
+                glyphImageRenderer.render(commandLine.glyphsToTest.indexOf(glyph), theGlyph);
             }
         } else {
             for (Map.Entry<Integer, String> entry : fontGlyphs.entrySet()) {
